@@ -1,29 +1,31 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { collection, doc, getDoc } from 'firebase/firestore/lite';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { getDoc, collection, doc } from 'firebase/firestore/lite';
 import { FirestoreContext } from '../../firebaseConfig';
-import { palette } from '../theme/colors';
 import Body from '../components/Body';
+import { palette } from '../theme/colors';
 
 type Animal = { name: string; sub: string; asset: string };
 
-const dummyData: Animal[] = [{ name: '', sub: '', asset: '' }];
+const dummyData: Animal[] = [];
 
 export default () => {
 	const db = useContext(FirestoreContext);
 	const [data, setData] = useState(dummyData);
 	useEffect(() => {
-		getDoc(doc(collection(db, 'summaries'), 'animals'))
-			.then(res => setData(res.data()?.summary as Animal[]))
+		getDoc(doc(collection(db, 'summaries'), 'animals')).then(res =>
+			setData(res.data()?.summary as Animal[])
+		);
 	}, []);
 	return (
 		<Body>
-			<View>
+			<View style={{ width: '100%' }}>
 				<Text style={styles.title}>Índex de Animais</Text>
 				<FlatList
 					data={data}
 					renderItem={ListItem}
 					keyExtractor={({ name }) => name}
+					style={{ width: '100%', paddingTop: 5, marginBottom: 35, paddingBottom: 10 }}
 				/>
 			</View>
 		</Body>
@@ -41,14 +43,16 @@ const ListItem = ({ item }: ListItemProps) => (
 
 const styles = StyleSheet.create({
 	listItem: {
-		padding: 6,
+		padding: 10,
 		backgroundColor: palette.sand,
 		alignItems: 'flex-start',
 		justifyContent: 'center',
-		borderRadius: 10,
+		borderRadius: 14,
 		shadowColor: 'black',
 		elevation: 2,
-		marginBottom: 6,
+		marginBottom: 12,
+		width: '80%',
+		alignSelf: 'center',
 	},
 	title: {
 		fontSize: 20,

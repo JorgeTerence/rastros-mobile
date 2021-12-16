@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 		paddingTop: 10,
+		backgroundColor: 'white',
 	},
 	android: {
 		paddingTop: (StatusBar.currentHeight ?? 0) + 15,
