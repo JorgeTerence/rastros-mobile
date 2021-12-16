@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import HomeScreen from './app/screens/HomeScreen';
+import { brand } from './app/theme/colors';
 import IndexScreen from './app/screens/IndexScreen';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -12,7 +13,7 @@ export default () => (
 		<Tab.Navigator
 			initialRouteName="Início"
 			shifting={true}
-			barStyle={{ backgroundColor: '#3B7FBA' }}
+			barStyle={{ backgroundColor: brand.ocean }}
 			screenOptions={({ route }) => ({
 				tabBarIcon: () => {
 					// Setup tab icons
