@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { brand, palette } from '../theme/colors';
+import { palette } from '../theme/colors';
+import Body from '../components/Body';
 
 type Animal = { name: string; alt: string };
 
@@ -14,14 +15,16 @@ const animals: Animal[] = [
 ];
 
 export default () => (
-	<View style={styles.container}>
-		<Text style={styles.title}>Índex de Animais</Text>
-		<FlatList
-			data={animals}
-			renderItem={ListItem}
-			keyExtractor={({ name }) => name}
-		/>
-	</View>
+	<Body>
+		<View>
+			<Text style={styles.title}>Índex de Animais</Text>
+			<FlatList
+				data={animals}
+				renderItem={ListItem}
+				keyExtractor={({ name }) => name}
+			/>
+		</View>
+	</Body>
 );
 
 type ListItemProps = { item: Animal };
@@ -34,13 +37,6 @@ const ListItem = ({ item }: ListItemProps) => (
 );
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-		paddingTop: 12,
-	},
 	listItem: {
 		padding: 6,
 		backgroundColor: palette.sand,
