@@ -1,7 +1,7 @@
+import dotenv from 'dotenv';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
 import { getStorage } from 'firebase/storage';
-import dotenv from 'dotenv';
 import { createContext } from 'react';
 
 dotenv.config();
