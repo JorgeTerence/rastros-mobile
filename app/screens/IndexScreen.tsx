@@ -1,18 +1,16 @@
 import { collection, doc, getDoc } from 'firebase/firestore/lite';
 import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text } from 'react-native';
 import { FirestoreContext } from '../../firebaseConfig';
 import Body from '../components/Body';
 import IndexItem from '../components/IndexItem';
 import type { Animal } from '../types/types';
 
-const dummyData: Animal[] = [];
-
 type Props = { navigation: any };
 
 export default ({ navigation }: Props) => {
 	const db = useContext(FirestoreContext);
-	const [data, setData] = useState(dummyData);
+	const [data, setData] = useState([] as Animal[]);
 	useEffect(() => {
 		getDoc(doc(collection(db, 'summaries'), 'animals')).then(res =>
 			setData(res.data()?.summary as Animal[])

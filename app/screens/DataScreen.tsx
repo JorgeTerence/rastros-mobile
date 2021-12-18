@@ -1,38 +1,37 @@
 import {
-   collection,
-   DocumentData,
-   getDocs,
-   query,
-   where
+	collection,
+	DocumentData,
+	getDocs,
+	query,
+	where,
 } from 'firebase/firestore/lite';
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useContext, useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { FirestoreContext, StorageContext } from '../../firebaseConfig';
 
-const dummyDoc: DocumentData = {};
+type Props = { navigation: any; route: any };
 
-type Props = { navigation: any, route: any };
-
+// TODO: A way for IOS users navigate back to the list ( 've been using the Android back button )
 export default ({ navigation, route }: Props) => {
-	let animal = route.params.name
+	let { name } = route.params;
 
 	const db = useContext(FirestoreContext);
 	const storage = useContext(StorageContext);
 
-	const [data, setData] = useState(dummyDoc);
+	const [data, setData] = useState({} as DocumentData);
 	const [imageUri, setImageUri] = useState('https://example.com');
 
 	useEffect(() => {
 		// Get data
 		const search = query(
 			collection(db, 'animals'),
-			where('name', '==', `${animal}`)
+			where('name', '==', name)
 		);
 		getDocs(search).then(res => setData(res.docs[0].data()));
 
 		// Get image
-		const imageRef = ref(storage, `pictures/animals/${animal}`);
+		const imageRef = ref(storage, `pictures/animals/${name}`);
 		getDownloadURL(imageRef).then(uri => setImageUri(uri));
 	}, []);
 
