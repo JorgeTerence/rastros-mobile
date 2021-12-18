@@ -1,11 +1,12 @@
 import { collection, doc, getDoc } from 'firebase/firestore/lite';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, createContext } from 'react';
 import {
 	FlatList,
 	Image,
 	StyleSheet,
 	Text,
-	View
+	View,
+	TouchableNativeFeedback
 } from 'react-native';
 import { FirestoreContext } from '../../firebaseConfig';
 import Body from '../components/Body';
@@ -15,7 +16,9 @@ type Animal = { name: string; sub: string; asset: string };
 
 const dummyData: Animal[] = [];
 
-export default () => {
+type Props = { navigation: any };
+
+export default ({ navigation }: Props) => {
 	const db = useContext(FirestoreContext);
 	const [data, setData] = useState(dummyData);
 	useEffect(() => {
@@ -29,7 +32,7 @@ export default () => {
 				<Text style={styles.title}>Índex de Animais</Text>
 				<FlatList
 					data={data}
-					renderItem={ListItem}
+					renderItem={({ item }) => <ListItem item={item} action={() => navigation.navigate('Data', item)} />}
 					keyExtractor={({ name }) => name}
 					style={{
 						width: '100%',
@@ -43,26 +46,26 @@ export default () => {
 	);
 };
 
-type ListItemProps = { item: Animal };
+type ListItemProps = { item: Animal, action: () => void };
 
-const ListItem = ({ item }: ListItemProps) => {
+const ListItem = ({ item, action }: ListItemProps) => {
 	// TODO: Make this responsive to each and every collection, not just animals
 	let imageSource;
-	if (item.asset == 'Mamífero')
-		imageSource = require('../../assets/mammal.png');
-	else if (item.asset == 'Réptil')
-		imageSource = require('../../assets/reptile.png');
+	if (item.asset == 'Mamífero') imageSource = require('../../assets/mammal.png');
+	else if (item.asset == 'Réptil') imageSource = require('../../assets/reptile.png');
 	else if (item.asset == 'Ave') imageSource = require('../../assets/bird.png');
 	return (
-		<View style={styles.listItem}>
-			<Image source={imageSource} style={styles.classIcon} />
-			<View>
-				<Text style={{ fontWeight: 'bold', fontSize: 16 }}>
-					{item.name}
-				</Text>
-				<Text>{item.sub}</Text>
+		<TouchableNativeFeedback onPress={action} >
+			<View style={styles.listItem}>
+				<Image source={imageSource} style={styles.classIcon} />
+				<View>
+					<Text style={{ fontWeight: 'bold', fontSize: 16 }}>
+						{item.name}
+					</Text>
+					<Text style={{ fontSize: 13, color: '#333' }}>{item.sub}</Text>
+				</View>
 			</View>
-		</View>
+		</TouchableNativeFeedback>
 	);
 };
 
