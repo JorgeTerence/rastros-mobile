@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 } from 'react-native';
 
-type BodyProps = { children: JSX.Element };
+type BodyProps = { children: JSX.Element | JSX.Element[] };
 
 export default ({ children }: BodyProps) => {
 	if (Platform.OS == 'ios') {

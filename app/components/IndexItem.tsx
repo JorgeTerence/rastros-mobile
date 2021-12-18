@@ -11,7 +11,8 @@ import type { Animal } from '../types/types';
 
 type Props = { item: Animal; action: () => void };
 
-/* TODO: Make this responsive to each and every collection, not just animals*/
+// TODO: Make this responsive to each and every collection, not just animals
+// FIXME: Create a wrapper component for touchables to work on IOS
 export default ({ item, action }: Props) => (
 	<TouchableNativeFeedback onPress={action}>
 		<View style={styles.indexItem}>
