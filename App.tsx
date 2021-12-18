@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import TabBarIcon from './app/components/TabBarIcon';
 import HomeScreen from './app/screens/HomeScreen';
-import IndexDataScreen from './app/screens/IndexDataScreen';
+import IndexDataScreen from './app/components/IndexTab';
 import { brand } from './app/theme/colors';
 
 const Tab = createMaterialBottomTabNavigator();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import IndexScreen from './IndexScreen';
-import DataScreen from './DataScreen';
+import IndexScreen from '../screens/IndexScreen';
+import DataScreen from '../screens/DataScreen';
 
 const Stack = createNativeStackNavigator();
 
