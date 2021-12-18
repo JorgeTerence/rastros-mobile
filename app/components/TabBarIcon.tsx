@@ -1,13 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
-
-type PossibleIcons =
-	| 'home'
-	| 'list'
-	| 'map'
-	| 'information-circle'
-	| 'settings';
+import type { PossibleIcons } from '../types/types'
 
 type Props = { route: RouteProp<ParamListBase, string> }
 

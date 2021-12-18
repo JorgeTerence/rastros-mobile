@@ -1,5 +1,5 @@
 import { collection, doc, getDoc } from 'firebase/firestore/lite';
-import React, { useContext, useEffect, useState, createContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
 	FlatList,
 	Image,
@@ -11,8 +11,7 @@ import {
 import { FirestoreContext } from '../../firebaseConfig';
 import Body from '../components/Body';
 import { palette } from '../theme/colors';
-
-type Animal = { name: string; sub: string; asset: string };
+import type { Animal } from '../types/types'
 
 const dummyData: Animal[] = [];
 
