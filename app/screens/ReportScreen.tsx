@@ -16,6 +16,12 @@ import { brand } from '../theme/colors';
 
 export default () => {
 	const [image, setImage] = useState('');
+	const pickImage = async () => {
+		const permition = await requestCameraPermissionsAsync();
+		if (!permition.granted) return;
+		const picture = await launchCameraAsync();
+		if (!picture.cancelled) setImage(picture.uri);
+	};
 	return (
 		<Body>
 			<Text style={styles.title}>Reportar Emergência</Text>
@@ -25,29 +31,24 @@ export default () => {
 				style={styles.input}
 				placeholder="Breve descrição"
 			/>
-			{image ? (
-				<View style={styles.imageBox}>
-					<Image source={{ uri: image }} style={styles.picture} />
-				</View>
-			) : (
+			<View style={styles.imageBox}>
 				<Pressable
 					style={{ width: '100%', alignItems: 'center' }}
-					onPress={async () => {
-						const permition = await requestCameraPermissionsAsync();
-						if (!permition.granted) return;
-						const picture = await launchCameraAsync();
-						if (!picture.cancelled) setImage(picture.uri);
-					}}
+					onPress={pickImage}
 				>
-					<View style={styles.imageBox}>
-						<Image
-							source={require('../../assets/camera.png')}
-							style={styles.camera}
-						/>
-						<Text style={styles.imageAltText}>Adicionar Imagem</Text>
-					</View>
+					{image ? (
+						<Image source={{ uri: image }} style={styles.picture} />
+					) : (
+						<View style={{ width: '100%', alignItems: 'center' }}>
+							<Image
+								source={require('../../assets/camera.png')}
+								style={styles.camera}
+							/>
+							<Text style={styles.imageAltText}>Adicionar Imagem</Text>
+						</View>
+					)}
 				</Pressable>
-			)}
+			</View>
 			<Pressable
 				onPress={() => alert('Notificação enviada')}
 				style={{ width: '65%' }}
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
 		elevation: 2,
 	},
 	picture: {
-		width: '95%',
+		width: '100%',
 		height: undefined,
 		aspectRatio: 3 / 4,
 		resizeMode: 'contain',
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
 		marginBottom: 25,
 		paddingVertical: 12,
 		width: '80%',
+		padding: 6,
 	},
 	input: {
 		width: '80%',
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'monospace',
 		marginBottom: 25,
 		padding: 6,
-      paddingHorizontal: 10,
+		paddingHorizontal: 10,
 	},
 	submitText: {
 		color: 'white',
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 	},
 	title: {
-		fontSize: 28,
+		fontSize: 26,
 		fontWeight: 'bold',
 		marginBottom: 35,
 	},
