@@ -10,6 +10,7 @@ export default ({ route: r }: Prop) => {
 	if (r.name == 'Início') iconName = 'home';
 	else if (r.name == 'Índex') iconName = 'list';
 	else if (r.name == 'Mapa') iconName = 'map';
+	else if (r.name == 'Reportar') iconName = 'alert-circle';
 	else if (r.name == 'Info') iconName = 'information-circle';
 
 	return <Ionicons name={iconName} color={'white'} size={22} />;
