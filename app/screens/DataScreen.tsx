@@ -1,3 +1,4 @@
+import { FontAwesome5 } from '@expo/vector-icons';
 import {
 	collection,
 	DocumentData,
@@ -7,13 +8,19 @@ import {
 } from 'firebase/firestore/lite';
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useContext, useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+	Image,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native';
 import { FirestoreContext, StorageContext } from '../../firebaseConfig';
-import { DataPack, Data } from '../components/DataPack';
+import { Data, DataPack } from '../components/DataPack';
 
 type Prop = { navigation: any; route: any };
 
-// TODO: A way for IOS users navigate back to the list ( 've been using the Android back button )
 export default ({ navigation, route }: Prop) => {
 	const { name } = route.params;
 
@@ -39,6 +46,14 @@ export default ({ navigation, route }: Prop) => {
 	return (
 		<ScrollView>
 			<View style={styles.container}>
+				<View style={{ width: '85%' }}>
+					<TouchableOpacity
+						onPress={() => navigation.goBack()}
+						style={styles.backArrow}
+					>
+						<FontAwesome5 name="arrow-left" size={24} color="black" />
+					</TouchableOpacity>
+				</View>
 				<DataPack>
 					<Text style={styles.title}>{data.name}</Text>
 				</DataPack>
@@ -85,5 +100,9 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		fontWeight: 'bold',
 		textAlign: 'center',
+	},
+	backArrow: {
+		alignSelf: 'flex-start',
+		marginBottom: 15,
 	},
 });
