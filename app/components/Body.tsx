@@ -7,9 +7,9 @@ import {
 	StyleSheet,
 } from 'react-native';
 
-type BodyProps = { children: JSX.Element | JSX.Element[] };
+type Prop = { children: JSX.Element | JSX.Element[] };
 
-export default ({ children }: BodyProps) => {
+export default ({ children }: Prop) => {
 	if (Platform.OS == 'ios') {
 		return <SafeAreaView style={styles.body}>{children}</SafeAreaView>;
 	} else {

@@ -7,13 +7,13 @@ import {
 	StyleSheet,
 } from 'react-native';
 import { palette } from '../theme/colors';
-import type { Animal } from '../types/types';
+import type { SummaryItem } from '../types/types';
 
-type Props = { item: Animal; action: () => void };
+type Prop = { item: SummaryItem; action: () => void };
 
 // TODO: Make this responsive to each and every collection, not just animals
 // FIXME: Create a wrapper component for touchables to work on IOS
-export default ({ item, action }: Props) => (
+export default ({ item, action }: Prop) => (
 	<TouchableNativeFeedback onPress={action}>
 		<View style={styles.indexItem}>
 			<Image source={decideAsset(item.asset)} style={styles.icon} />

@@ -3,9 +3,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 import type { PossibleIcons } from '../types/types'
 
-type Props = { route: RouteProp<ParamListBase, string> }
+type Prop = { route: RouteProp<ParamListBase, string> }
 
-export default ({ route: r }: Props) => {
+export default ({ route: r }: Prop) => {
 	let iconName: PossibleIcons = 'settings';
 	if (r.name == 'Início') iconName = 'home';
 	else if (r.name == 'Índex') iconName = 'list';

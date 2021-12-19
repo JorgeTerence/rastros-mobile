@@ -9,12 +9,13 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useContext, useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { FirestoreContext, StorageContext } from '../../firebaseConfig';
+import { DataPack, Data } from '../components/DataPack';
 
-type Props = { navigation: any; route: any };
+type Prop = { navigation: any; route: any };
 
 // TODO: A way for IOS users navigate back to the list ( 've been using the Android back button )
-export default ({ navigation, route }: Props) => {
-	let { name } = route.params;
+export default ({ navigation, route }: Prop) => {
+	const { name } = route.params;
 
 	const db = useContext(FirestoreContext);
 	const storage = useContext(StorageContext);
@@ -38,61 +39,51 @@ export default ({ navigation, route }: Props) => {
 	return (
 		<ScrollView>
 			<View style={styles.container}>
-				<Text style={styles.title}>{data.name}</Text>
-				<Text style={styles.subtitle}>{data.scientificName}</Text>
-				<Image source={{ uri: imageUri }} style={styles.picture} />
-				<DataBox subject="Classificação" data={data.classification} />
-				<DataBox subject="Alimentação" data={data.feeding} />
-				<DataBox subject="Descrição" data={data.description} />
-				<DataBox
-					subject="Estado de Concervação"
-					data={data.conservationStatus}
-				/>
-				<DataBox subject="Dietas" data={data.diets} />
-				<DataBox subject="Outros nomes" data={data.otherNames} />
+				<DataPack>
+					<Text style={styles.title}>{data.name}</Text>
+				</DataPack>
+				<DataPack>
+					<Text style={styles.subtitle}>{data.scientificName}</Text>
+				</DataPack>
+				<DataPack>
+					<Image source={{ uri: imageUri }} style={styles.picture} />
+				</DataPack>
+				<DataPack>
+					<Data subject="Classificação" data={data.classification} />
+					<Data subject="Alimentação" data={data.feeding} />
+					<Data subject="Descrição" data={data.description} />
+					<Data
+						subject="Estado de Concervação"
+						data={data.conservationStatus}
+					/>
+					<Data subject="Dietas" data={data.diets} />
+					<Data subject="Outros nomes" data={data.otherNames} />
+				</DataPack>
 			</View>
 		</ScrollView>
 	);
 };
 
-type DataProps = { subject: string; data: string };
-
-const DataBox = ({ subject, data }: DataProps) => (
-	<View
-		style={{
-			marginBottom: 8,
-			elevation: 2,
-			padding: 4,
-			width: '80%',
-		}}
-	>
-		<Text style={{ textAlign: 'left' }}>
-			<Text style={{ fontWeight: 'bold' }}>{subject}: </Text>
-			{data}
-		</Text>
-	</View>
-);
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		paddingVertical: 16,
+		paddingTop: 50,
+		paddingBottom: 10,
 	},
 	picture: {
-		width: '80%',
+		width: '100%',
 		height: undefined,
 		aspectRatio: 3 / 2,
-		marginBottom: 10,
 	},
 	subtitle: {
 		fontSize: 16,
-		marginBottom: 12,
 		fontFamily: 'monospace',
+		textAlign: 'center',
 	},
 	title: {
-		fontSize: 28,
+		fontSize: 25,
 		fontWeight: 'bold',
-		marginBottom: 10,
+		textAlign: 'center',
 	},
 });

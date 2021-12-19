@@ -4,16 +4,17 @@ import { FlatList, StyleSheet, Text } from 'react-native';
 import { FirestoreContext } from '../../firebaseConfig';
 import Body from '../components/Body';
 import IndexItem from '../components/IndexItem';
-import type { Animal } from '../types/types';
+import type { SummaryItem } from '../types/types';
 
-type Props = { navigation: any };
+// TODO: try to properly use react-native-navigation props
+type Prop = { navigation: any };
 
-export default ({ navigation }: Props) => {
+export default ({ navigation }: Prop) => {
 	const db = useContext(FirestoreContext);
-	const [data, setData] = useState([] as Animal[]);
+	const [data, setData] = useState([] as SummaryItem[]);
 	useEffect(() => {
 		getDoc(doc(collection(db, 'summaries'), 'animals')).then(res =>
-			setData(res.data()?.summary as Animal[])
+			setData(res.data()?.summary as SummaryItem[])
 		);
 	}, []);
 	return (
@@ -38,8 +39,6 @@ const styles = StyleSheet.create({
 	list: {
 		width: '100%',
 		paddingTop: 5,
-		marginBottom: 45,
-		paddingBottom: 10,
 	},
 	title: {
 		fontSize: 20,
