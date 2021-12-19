@@ -6,16 +6,15 @@ import Body from '../components/Body';
 import IndexItem from '../components/IndexItem';
 import type { SummaryItem } from '../types/types';
 
-// TODO: try to properly use react-native-navigation props
 type Prop = { navigation: any };
 
 export default ({ navigation }: Prop) => {
 	const db = useContext(FirestoreContext);
 	const [data, setData] = useState([] as SummaryItem[]);
 	useEffect(() => {
-		getDoc(doc(collection(db, 'summaries'), 'animals')).then(res =>
-			setData(res.data()?.summary as SummaryItem[])
-		);
+		getDoc(doc(collection(db, 'summaries'), 'animals'))
+			.then(res =>setData(res.data()?.summary as SummaryItem[]))
+			.catch(error => console.log(error));
 	}, []);
 	return (
 		<Body>
