@@ -5,15 +5,17 @@ import {
 	StatusBar,
 	Platform,
 	StyleSheet,
+	StyleProp,
+	ViewStyle,
 } from 'react-native';
 
-type Prop = { children: JSX.Element | JSX.Element[] };
+type Prop = { children: JSX.Element | JSX.Element[], style?: StyleProp<ViewStyle> };
 
-export default ({ children }: Prop) => {
+export default ({ children, style }: Prop) => {
 	if (Platform.OS == 'ios') {
-		return <SafeAreaView style={styles.body}>{children}</SafeAreaView>;
+		return <SafeAreaView style={[styles.body, style]}>{children}</SafeAreaView>;
 	} else {
-		return <View style={[styles.body, styles.android]}>{children}</View>;
+		return <View style={[styles.body, styles.android, style]}>{children}</View>;
 	}
 };
 

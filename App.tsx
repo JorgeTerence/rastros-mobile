@@ -7,6 +7,7 @@ import IndexDataScreen from './app/components/IndexTab';
 import ReportScreen from './app/screens/ReportScreen';
 import MapScreen from './app/screens/MapScreen';
 import { brand } from './app/theme/colors';
+import BookletScreen from './app/screens/BookletScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,6 +25,7 @@ export default () => (
 			<Tab.Screen name="Índex" component={IndexDataScreen} />
 			<Tab.Screen name="Mapa" component={MapScreen} />
 			<Tab.Screen name="Reportar" component={ReportScreen} />
+			<Tab.Screen name="Cartilha" component={BookletScreen} />
 		</Tab.Navigator>
 	</NavigationContainer>
 );

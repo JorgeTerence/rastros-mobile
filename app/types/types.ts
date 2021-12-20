@@ -29,4 +29,5 @@ export type PossibleIcons =
 	| 'map'
 	| 'information-circle'
 	| 'settings'
-	| 'alert-circle';
+	| 'alert-circle'
+	| 'document';
