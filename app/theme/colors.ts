@@ -10,5 +10,6 @@ export const brand = {
 };
 
 export const palette = {
-   sand: '#FAC355'
-}
+	sand: '#FAC355',
+	rose: '#E62720',
+};
