@@ -12,6 +12,7 @@ import {
 	View,
 } from 'react-native';
 import Body from '../components/Body';
+import { Title } from '../components/Typography';
 import { brand } from '../theme/colors';
 
 export default () => {
@@ -24,7 +25,7 @@ export default () => {
 	};
 	return (
 		<Body>
-			<Text style={styles.title}>Reportar Emergência</Text>
+			<Title>Reportar Emergência</Title>
 			<TextInput
 				maxLength={511}
 				multiline={true}
@@ -109,10 +110,5 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontWeight: 'bold',
 		fontSize: 18,
-	},
-	title: {
-		fontSize: 26,
-		fontWeight: 'bold',
-		marginBottom: 35,
 	},
 });

@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import { FirestoreContext, StorageContext } from '../../firebaseConfig';
 import { Data, DataPack } from '../components/DataPack';
+import { Title } from '../components/Typography';
 
 type Prop = { navigation: any; route: any };
 
@@ -55,7 +56,7 @@ export default ({ navigation, route }: Prop) => {
 					</TouchableOpacity>
 				</View>
 				<DataPack>
-					<Text style={styles.title}>{data.name}</Text>
+					<Title>{data.name}</Title>
 				</DataPack>
 				<DataPack>
 					<Text style={styles.subtitle}>{data.scientificName}</Text>
@@ -94,11 +95,6 @@ const styles = StyleSheet.create({
 	subtitle: {
 		fontSize: 16,
 		fontFamily: 'monospace',
-		textAlign: 'center',
-	},
-	title: {
-		fontSize: 25,
-		fontWeight: 'bold',
 		textAlign: 'center',
 	},
 	backArrow: {
